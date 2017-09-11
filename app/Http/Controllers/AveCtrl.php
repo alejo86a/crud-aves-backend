@@ -110,8 +110,26 @@ class AveCtrl extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        DB::table('tont_aves_paises')
+         ->where('tont_aves_paises.CDAVE','=',$id)
+         ->delete();
+         
+        DB::table('tont_aves')
+         ->where('tont_aves.CDAVE','=',$id)
+         ->update([
+             'DSNOMBRE_COMUN'=>$request['DSNOMBRE_COMUN'],
+             'DSNOMBRE_CIENTIFICO'=>$request['DSNOMBRE_CIENTIFICO']
+        ]);
+        
+        for($i = 0;$i<count($request->input('paises'));$i++){
+            Tont_aves_paise::create([
+                'CDAVE'=>$request->input('CDAVE'),
+                'CDPAIS'=>$request->input('paises')[$i]['CDPAIS'],
+            ]);
+        }
+        $ave = Tont_ave::where('CDAVE','=',$request->input('CDAVE'))->first();
+        return $ave;
     }
 
     /**

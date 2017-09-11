@@ -28,5 +28,7 @@ Route::post('ave', 'AveCtrl@store');
 
 Route::delete('ave/{id}', 'AveCtrl@destroy');
 
+Route::put('ave/{id}', 'AveCtrl@update');
+
 
 

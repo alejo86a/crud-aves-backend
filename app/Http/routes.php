@@ -24,6 +24,10 @@ Route::get('ave', 'AveCtrl@index');
 
 Route::get('ave/{id}', 'AveCtrl@indexPorId');
 
+Route::get('ave/zona/{zona}', 'AveCtrl@indexPorZona');
+
+Route::get('ave/nombre/{nombre}', 'AveCtrl@indexPorNombre');
+
 Route::post('ave', 'AveCtrl@store');
 
 Route::delete('ave/{id}', 'AveCtrl@destroy');

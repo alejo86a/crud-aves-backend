@@ -45,6 +45,30 @@ class AveCtrl extends Controller
         return $respuesta['ave'];
     }
 
+    public function indexPorZona($zona)
+    {
+        $respuesta['ave']=  DB::table('tont_zonas')
+         ->where('tont_zonas.DSNOMBRE','LIKE','%'.$zona.'%')
+         ->join('tont_paises','tont_zonas.CDZONA','=','tont_paises.CDZONA')
+         ->join('tont_aves_paises','tont_paises.CDPAIS','=','tont_aves_paises.CDPAIS')
+         ->join('tont_aves','tont_aves_paises.CDAVE','=','tont_aves.CDAVE')
+         ->select('tont_aves.*')
+         ->get();
+        
+        return $respuesta['ave'];
+    }
+    
+    public function indexPorNombre($nombre)
+    {
+        $respuesta['ave']=  DB::table('tont_aves')
+         ->where('tont_aves.DSNOMBRE_COMUN','LIKE','%'.$nombre.'%')
+         ->orwhere('tont_aves.DSNOMBRE_CIENTIFICO','LIKE','%'.$nombre.'%')
+         ->select('tont_aves.*')
+         ->get();
+        
+        return $respuesta['ave'];
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

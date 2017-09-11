@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/saludo', function () {
-    return "hola mundo";
-});
+route::get('zona', 'ZonaCtrl@index');
+
+route::get('pais', 'PaisCtrl@index');
+

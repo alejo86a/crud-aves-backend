@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Tont_paise;
+use DB;
 
 class PaisCtrl extends Controller
 {
@@ -17,7 +18,13 @@ class PaisCtrl extends Controller
      */
     public function index()
     {
-        return Tont_paise::all();
+        //return Tont_paise::all();
+        
+        $paises = DB::table('tont_paises')
+            ->join('tont_zonas','tont_paises.CDZONA','=','tont_zonas.CDZONA')
+            ->select('tont_paises.*','tont_zonas.DSNOMBRE as DSNOMBREZONA')
+            ->get();
+        return $paises;
     }
 
     /**

@@ -16,7 +16,17 @@ Route::get('/', function () {
 });
 
 
-route::get('zona', 'ZonaCtrl@index');
+Route::get('zona', 'ZonaCtrl@index');
 
-route::get('pais', 'PaisCtrl@index');
+Route::get('pais', 'PaisCtrl@index');
+
+Route::get('ave', 'AveCtrl@index');
+
+Route::get('ave/{id}', 'AveCtrl@indexPorId');
+
+Route::post('ave', 'AveCtrl@store');
+
+Route::delete('ave/{id}', 'AveCtrl@destroy');
+
+
 

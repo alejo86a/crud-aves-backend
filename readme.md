@@ -1,27 +1,47 @@
-# Laravel PHP Framework
+# crud-aves-backend
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+A **Laravel 5.2 (PHP)** REST API backend for managing a catalog of birds (*aves*), the countries (*países*) they inhabit, and geographic zones (*zonas*).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## What this is
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+This is a backend practice/coursework project built on top of the default Laravel framework skeleton. It exposes a simple CRUD API for birds, associating each bird with the countries/zones where it can be found. It appears to be a university or self-training exercise for learning Laravel and relational data modeling (birds ↔ countries ↔ zones, with a pivot table).
 
-## Official Documentation
+## Tech stack
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+- PHP, Laravel 5.2 framework
+- MySQL (via Eloquent / raw `DB::table` queries)
+- Laravel Elixir + Gulp for front-end asset compilation
+- PHPUnit for testing
 
-## Contributing
+## Data model
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+- `tont_zona` — geographic zones
+- `tont_paise` — countries, linked to a zone
+- `tont_ave` — birds
+- `tont_aves_paise` — pivot table linking birds to countries
 
-## Security Vulnerabilities
+## API routes (see `app/Http/routes.php`)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+- `GET /ave` — list all birds
+- `GET /ave/{id}` — bird by id (with its countries/zones)
+- `GET /ave/zona/{zona}` — birds by zone
+- `GET /ave/nombre/{nombre}` — birds by name
+- `POST /ave` — create a bird
+- `PUT /ave/{id}` — update a bird
+- `DELETE /ave/{id}` — delete a bird
+- `GET /pais`, `GET /zona` — list countries / zones
 
-## License
+## How to run
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+# configure DB_* variables in .env, then run migrations
+php artisan migrate
+php artisan serve
+```
+
+## Context
+
+Personal/coursework practice project for building a CRUD REST API with Laravel; not a production system.
